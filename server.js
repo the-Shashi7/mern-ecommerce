@@ -24,7 +24,6 @@ app.use(morgan('dev'));
 
 //router call
 app.use('/api/v1/auth', authRoute);
-app.use('/test',requireSignIn,isAdmin,test);
 
 //rest api
 app.get('/',(req,res)=>{

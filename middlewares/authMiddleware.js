@@ -5,15 +5,19 @@ import userModel from "../models/userModel.js";
 
 export const requireSignIn = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1]
-    const decod = JWT.verify(token,'HELLOWORLD');
+    const decod = JWT.verify(
+      req.headers.authorization.split(" ")[1], 
+      "HELLOWORLD");
     req.user = decod;
+    res.send({
+      message:'Somenting went wrong in require sign'
+    })
     next();
   } catch (error) {
     console.log(error);
     res.status(400).send({
       message: "Error in requireSignIn token verifying",
-      error
+      error,
     });
   }
 };
@@ -38,4 +42,3 @@ export const isAdmin = async (req, res, next) => {
     });
   }
 };
- 
